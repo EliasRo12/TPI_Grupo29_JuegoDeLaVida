@@ -1,0 +1,13 @@
+﻿# Archivos temporales de Pharo
+*.image
+*.changes
+*.sources
+
+# Archivos temporales de Windows
+Thumbs.db
+Desktop.ini
+
+# Archivos temporales de editores
+*.swp
+*.swo
+*~

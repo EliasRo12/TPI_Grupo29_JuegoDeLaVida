@@ -1,0 +1,38 @@
+classDiagram
+  direction TB
+  class SimuladorJuegoDeLaVida {
+    -grilla
+    -generacionActual : Integer
+    -generacionesObjetivo : Integer
+    +paso() Boolean
+    +ejecutar()
+    +poblacionActual() Integer
+    +finalizo() Boolean
+  }
+  class Grilla {
+    <<abstract>>
+    -filas : Integer
+    -columnas : Integer
+    -celdas : Array
+    +celdaEnFila:columna:()
+    +conectarVecinas()
+    +celdasVecinasDeFila:columna:()
+    +avanzarGeneracion()
+    +poblacionViva() Integer
+  }
+  class GrillaPlana { +celdasVecinasDeFila:columna:() }
+  class GrillaToroidal { +celdasVecinasDeFila:columna:() }
+  class Celda {
+    -estadoActual : Boolean
+    -estadoSiguiente : Boolean
+    -vecinas : Collection
+    +estaViva() Boolean
+    +cantidadVecinasVivas() Integer
+    +prepararSiguienteEstado()
+    +confirmarEvolucion()
+  }
+  Grilla <|-- GrillaPlana
+  Grilla <|-- GrillaToroidal
+  SimuladorJuegoDeLaVida "1" --> "1" Grilla : utiliza
+  Grilla "1" *-- "1..*" Celda : contiene
+  Celda "0..8" --> "0..8" Celda : vecinas

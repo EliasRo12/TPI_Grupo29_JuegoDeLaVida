@@ -1,0 +1,16 @@
+digraph TPI {
+  graph [rankdir=TB, bgcolor="white", nodesep=0.54, ranksep=0.65, splines=polyline, pad=0.25, fontname="Arial"];
+  node [shape=record, fontname="Arial", fontsize=10, penwidth=1.1, color="#24446D", style="rounded,filled", fillcolor="#F6F9FC"];
+  edge [fontname="Arial", fontsize=9, color="#50627B", arrowsize=0.7];
+  Simulador [label="{SimuladorJuegoDeLaVida| -grilla : Grilla\l-generacionActual : Integer\l-generacionesObjetivo : Integer\l| +paso() : Boolean\l+ejecutar()\l+poblacionActual() : Integer\l+finalizo() : Boolean\l}"];
+  Grilla [label="{«abstracta» Grilla|-filas : Integer\l-columnas : Integer\l-celdas : Array\l|+celdaEnFila:columna:()\l+conectarVecinas()\l+avanzarGeneracion()\l+poblacionViva() : Integer\l+celdasVecinasDeFila:columna:()\l}",fillcolor="#E8F1FB"];
+  Plana [label="{GrillaPlana|+celdasVecinasDeFila:columna:()}"];
+  Toroidal [label="{GrillaToroidal|+celdasVecinasDeFila:columna:()}",fillcolor="#EFF8EE"];
+  Celda [label="{Celda|-estadoActual : Boolean\l-estadoSiguiente : Boolean\l-vecinas : Collection\l|+estaViva() : Boolean\l+cantidadVecinasVivas() : Integer\l+prepararSiguienteEstado()\l+confirmarEvolucion()\l}"];
+  Simulador -> Grilla [label="usa   1 → 1",arrowhead=vee];
+  Grilla -> Celda [label="compone   1 → 1..*",dir=back,arrowtail=diamond,arrowhead=none];
+  Plana -> Grilla [arrowhead=empty, arrowsize=1.3];
+  Toroidal -> Grilla [arrowhead=empty, arrowsize=1.3];
+  {rank=same;Plana;Toroidal;}
+  Celda -> Celda [constraint=false, label="vecinas 0..8", arrowhead=vee];
+}
