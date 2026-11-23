@@ -1,4 +1,0 @@
-"Caso invalido controlado: una grilla toroidal de 2x2 no esta permitida."
-[ GrillaToroidal conFilas: 2 columnas: 2 vivasEn: #() ]
-    on: Error
-    do: [ :ex | Transcript show: 'Error controlado: '; show: ex messageText; cr ].
